@@ -8,5 +8,14 @@ namespace supermarket
 {
     internal class Product
     {
+        public Product(string name, int prise)
+        {
+            Name = name;
+            Price = prise;
+        }
+
+        private string Name { get; set; }
+
+        private int Price { get; set; }
     }
 }
