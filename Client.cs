@@ -41,8 +41,11 @@ namespace supermarket
             {
                 purchaseAmount = TakeBasketPrice();
 
-                Console.WriteLine("Недостаточно средств");
-                Console.WriteLine("Выкидываем товар");
+                Console.WriteLine($"{Name}\n" +
+                $"Недостаточно средств\n" +
+                $"Выкидываем товар");
+
+                Console.WriteLine();
 
                 if (Money < purchaseAmount)
                 {
@@ -50,12 +53,13 @@ namespace supermarket
                 }
             }
 
-            Console.WriteLine("Покупка успешна");
+            Console.WriteLine($"{Name}\n" + $"Покупка успешна");
+
+            Console.WriteLine();
 
             Money -= purchaseAmount;
 
             return purchaseAmount;
-
         }
 
         public void AddProductBasket(List<Product> products, List<Product> basket)
