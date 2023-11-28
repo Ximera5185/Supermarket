@@ -14,8 +14,7 @@ namespace supermarket
             Price = prise;
         }
 
+        public int Price { get; private set; }
         private string Name { get; set; }
-
-        private int Price { get; set; }
     }
 }

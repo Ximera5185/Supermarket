@@ -10,6 +10,9 @@ namespace supermarket
     {
         static void Main(string [] args)
         {
+            Supermarket supermarket = new Supermarket();
+
+            Console.ReadKey();
         }
     }
 }
