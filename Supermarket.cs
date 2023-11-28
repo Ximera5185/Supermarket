@@ -12,60 +12,65 @@ namespace supermarket
         public Supermarket()
         {
             Cash = 0;
-
-             AddProduct(_products);
-
-            AddClient(_queueClients);
-
-            ShowClients(_queueClients);
-
-            ServeClients(_queueClients,Cash);
         }
 
         private int Cash { get; set; }
 
-        private void AddProduct(List<Product> products)
+        public void Work() 
         {
-            products.Add(new Product("Сахар", 100));
-            products.Add(new Product("Молоко", 70));
-            products.Add(new Product("Хлеб", 50));
-            products.Add(new Product("Сыр", 200));
-            products.Add(new Product("Яблоко", 250));
+            AddProduct();
+
+            AddClient();
+
+            ShowClients();
+
+            ServeClients();
+
+            ShowCashSupermarcet();
         }
 
-        public void AcceptPayment(Client client, int purchaseAmount)
+        private void ShowCashSupermarcet()
         {
-            Cash += client.Pay(purchaseAmount);
+            Console.WriteLine($"Касса магазина - {Cash}");
         }
 
-        private void AddClient(List<Client> queueClients)
+        private void AddProduct()
         {
-            queueClients.Add(new Client(_products,"Алена"));
-            queueClients.Add(new Client(_products, "Дима"));
-            queueClients.Add(new Client(_products, "Аня"));
-            queueClients.Add(new Client(_products, "Оля"));
-            queueClients.Add(new Client(_products, "Данил"));
+            _products.Add(new Product("Сахар", 100));
+            _products.Add(new Product("Молоко", 70));
+            _products.Add(new Product("Хлеб", 50));
+            _products.Add(new Product("Сыр", 200));
+            _products.Add(new Product("Яблоко", 250));
         }
 
-        private void ServeClients(List<Client> queueClients, int cash)
+        private void AddClient()
+        {
+            _queueClients.Add(new Client(_products, "Алена"));
+            _queueClients.Add(new Client(_products, "Дима"));
+            _queueClients.Add(new Client(_products, "Аня"));
+            _queueClients.Add(new Client(_products, "Оля"));
+            _queueClients.Add(new Client(_products, "Данил"));
+        }
+
+        private void ServeClients()
         {
             int _purchaseAmount = 0;
 
-            for (int i = 0; i < queueClients.Count; i++)
+            for (int i = 0; i < _queueClients.Count; i++)
             {
-                _purchaseAmount = queueClients [i].TakeBasketPrice();
+                _purchaseAmount = _queueClients [i].TakeBasketPrice();
 
-               cash = queueClients [i].Pay(_purchaseAmount);
+                Cash += _queueClients [i].Pay(_purchaseAmount);
             }
         }
 
-        private void ShowClients(List<Client> clients) 
+        private void ShowClients()
         {
-            for (int i = 0; i < clients.Count; i++)
+            for (int i = 0; i < _queueClients.Count; i++)
             {
                 Console.WriteLine("деньги клиента");
 
-                clients [i].ShowClientInfo();
+                _queueClients [i].ShowClientInfo();
             }
         }
     }

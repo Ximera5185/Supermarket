@@ -8,6 +8,8 @@ namespace supermarket
         {
             Supermarket supermarket = new Supermarket();
 
+            supermarket.Work();
+
             Console.ReadKey();
         }
     }

@@ -7,10 +7,22 @@ namespace supermarket
         public Product(string name, int prise)
         {
             Name = name;
+
             Price = prise;
         }
 
-        public int Price { get; private set; }
-        public string Name { get;private set; }
+        private int Price { get; set; }
+
+        private string Name { get; set; }
+
+        public string GetName()
+        {
+            return Name;
+        }
+
+        public int GetPrice()
+        {
+            return Price;
+        }
     }
 }

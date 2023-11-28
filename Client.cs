@@ -5,13 +5,12 @@ namespace supermarket
 {
     internal class Client
     {
-
         static private Random _random = new Random();
 
         private List<Product> _basket = new List<Product>();
 
-        private int _maxValueMoney = 700;
-        private int _minValueMoney = 100;
+        private readonly int _maxValueMoney = 700;
+        private readonly int _minValueMoney = 100;
 
         public Client(List<Product> products, string name)
         {
@@ -31,26 +30,32 @@ namespace supermarket
 
             for (int i = 0; i < _basket.Count; i++)
             {
-                Console.WriteLine($"Название продукта - {_basket [i].Name} Стоимость продукта - {_basket [i].Price}");
+                Console.WriteLine($"Название продукта - {_basket [i].GetName()} Стоимость продукта - {_basket [i].GetPrice()}");
             }
         }
 
         public int Pay(int purchaseAmount)
         {
-            if (Money >= purchaseAmount)
-            {
-                Console.WriteLine("Покупка успешна");
 
-                Money -= purchaseAmount;
-
-                return purchaseAmount;
-            }
-            else
+            while (Money < purchaseAmount)
             {
+                purchaseAmount = TakeBasketPrice();
+
                 Console.WriteLine("Недостаточно средств");
+                Console.WriteLine("Выкидываем товар");
 
-                return 0;
+                if (Money < purchaseAmount)
+                {
+                    _basket.RemoveAt(0);
+                }
             }
+
+            Console.WriteLine("Покупка успешна");
+
+            Money -= purchaseAmount;
+
+            return purchaseAmount;
+
         }
 
         public void AddProductBasket(List<Product> products, List<Product> basket)
@@ -61,7 +66,6 @@ namespace supermarket
 
             for (int i = 0; i < numberSelectedProducts; i++)
             {
-
                 indexsProduct = _random.Next(0, products.Count);
 
                 basket.Add(products [indexsProduct]);
@@ -74,7 +78,7 @@ namespace supermarket
 
             for (int i = 0; i < _basket.Count; i++)
             {
-                basketPrice += _basket [i].Price;
+                basketPrice += _basket [i].GetPrice();
             }
 
             return basketPrice;
