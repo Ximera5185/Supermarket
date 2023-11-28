@@ -13,7 +13,7 @@ namespace supermarket
         {
             Cash = 0;
 
-            AddProduct(_products);
+             AddProduct(_products);
 
             AddClient(_queueClients);
 
@@ -35,7 +35,6 @@ namespace supermarket
 
         public void AcceptPayment(Client client, int purchaseAmount)
         {
-
             Cash += client.Pay(purchaseAmount);
         }
 

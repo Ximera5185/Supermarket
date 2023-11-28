@@ -6,8 +6,7 @@ namespace supermarket
     internal class Client
     {
 
-        Random random = new Random();
-        Random random1 = new Random();
+        static private Random _random = new Random();
 
         private List<Product> _basket = new List<Product>();
 
@@ -18,15 +17,13 @@ namespace supermarket
         {
             Name = name;
 
-            Money = random1.Next(_minValueMoney, _maxValueMoney);
+            Money = _random.Next(_minValueMoney, _maxValueMoney);
 
             AddProductBasket(products, _basket);
         }
 
-
         private string Name { get; set; }
         private int Money { get; set; }
-
 
         public void ShowClientInfo()
         {
@@ -58,18 +55,17 @@ namespace supermarket
 
         public void AddProductBasket(List<Product> products, List<Product> basket)
         {
-            int numberSelectedProducts = new Random().Next(0, products.Count);
+            int numberSelectedProducts = _random.Next(1, products.Count);
 
             int indexsProduct;
 
             for (int i = 0; i < numberSelectedProducts; i++)
             {
-   
-                indexsProduct =new Random().Next(0, products.Count);
+
+                indexsProduct = _random.Next(0, products.Count);
 
                 basket.Add(products [indexsProduct]);
             }
-
         }
 
         public int TakeBasketPrice()
