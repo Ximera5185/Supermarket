@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace supermarket
+﻿namespace supermarket
 {
     internal class Product
     {
