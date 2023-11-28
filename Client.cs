@@ -9,8 +9,9 @@ namespace supermarket
 {
     internal class Client
     {
-        
-    Random random1 = new Random();
+
+        Random random = new Random();
+        Random random1 = new Random();
 
         private List<Product> _basket = new List<Product>();
 
@@ -26,14 +27,19 @@ namespace supermarket
             AddProductBasket(products, _basket);
         }
 
-        
+
         private string Name { get; set; }
         private int Money { get; set; }
 
-      
+
         public void ShowClientInfo()
         {
             Console.WriteLine($"{Name} - {Money}");
+
+            for (int i = 0; i < _basket.Count; i++)
+            {
+                Console.WriteLine($"Название продукта - {_basket [i].Name} Стоимость продукта - {_basket [i].Price}");
+            }
         }
 
         public int Pay(int purchaseAmount)
@@ -52,19 +58,18 @@ namespace supermarket
 
                 return 0;
             }
-
-
         }
 
         public void AddProductBasket(List<Product> products, List<Product> basket)
         {
-            int numberSelectedProducts = new Random().Next(0, products.Count);
+            int numberSelectedProducts = random.Next(0, products.Count);
 
             int indexsProduct;
 
             for (int i = 0; i < numberSelectedProducts; i++)
             {
-                indexsProduct = new Random().Next(0, products.Count);
+
+                indexsProduct = random1.Next(0, products.Count);
 
                 basket.Add(products [indexsProduct]);
             }

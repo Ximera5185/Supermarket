@@ -15,6 +15,6 @@ namespace supermarket
         }
 
         public int Price { get; private set; }
-        private string Name { get; set; }
+        public string Name { get;private set; }
     }
 }
