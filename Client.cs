@@ -62,17 +62,18 @@ namespace supermarket
 
         public void AddProductBasket(List<Product> products, List<Product> basket)
         {
-            int numberSelectedProducts = random.Next(0, products.Count);
+            int numberSelectedProducts = new Random().Next(0, products.Count);
 
             int indexsProduct;
 
             for (int i = 0; i < numberSelectedProducts; i++)
             {
-
-                indexsProduct = random1.Next(0, products.Count);
+   
+                indexsProduct =new Random().Next(0, products.Count);
 
                 basket.Add(products [indexsProduct]);
             }
+
         }
 
         public int TakeBasketPrice()
