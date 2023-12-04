@@ -7,7 +7,7 @@ namespace supermarket
     {
         private List<Product> _products = new List<Product>();
 
-        private List<Client> _queueClients = new List<Client>();
+        private Queue<Client> _queueClients = new Queue<Client>();
 
         public Supermarket()
         {
@@ -16,7 +16,7 @@ namespace supermarket
 
         private int Cash { get; set; }
 
-        public void Work() 
+        public void Work()
         {
             AddProduct();
 
@@ -45,32 +45,41 @@ namespace supermarket
 
         private void AddClient()
         {
-            _queueClients.Add(new Client(_products, "Алена"));
-            _queueClients.Add(new Client(_products, "Дима"));
-            _queueClients.Add(new Client(_products, "Аня"));
-            _queueClients.Add(new Client(_products, "Оля"));
-            _queueClients.Add(new Client(_products, "Данил"));
+            _queueClients.Enqueue(new Client(_products, "Алена"));
+            _queueClients.Enqueue(new Client(_products, "Дима"));
+            _queueClients.Enqueue(new Client(_products, "Аня"));
+            _queueClients.Enqueue(new Client(_products, "Оля"));
+            _queueClients.Enqueue(new Client(_products, "Данил"));
         }
 
         private void ServeClients()
         {
-            int _purchaseAmount = 0;
+            int _purchaseAmount;
 
-            for (int i = 0; i < _queueClients.Count; i++)
+            while (_queueClients.Count > 0)
             {
-                _purchaseAmount = _queueClients [i].TakeBasketPrice();
+                Client client = _queueClients.Dequeue();
 
-                Cash += _queueClients [i].Pay(_purchaseAmount);
+                _purchaseAmount = client.TakeBasketPrice();
+
+                Cash += client.Pay(_purchaseAmount);
             }
         }
 
         private void ShowClients()
         {
-            for (int i = 0; i < _queueClients.Count; i++)
+            int counter = 0;
+
+            while (counter <= _queueClients.Count -1)
             {
+
+                Client client = _queueClients.Peek();
+
                 Console.WriteLine("деньги клиента");
 
-                _queueClients [i].ShowClientInfo();
+                client.ShowClientInfo();
+
+                counter++;
             }
         }
     }

@@ -6,21 +6,10 @@
         {
             Name = name;
 
-            Price = prise;
+            Prise = prise;
         }
 
-        private int Price { get; set; }
-
-        private string Name { get; set; }
-
-        public string GetName()
-        {
-            return Name;
-        }
-
-        public int GetPrice()
-        {
-            return Price;
-        }
+        public string Name { get; private set; }
+        public int Prise { get; private set; }
     }
 }

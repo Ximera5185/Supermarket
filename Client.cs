@@ -18,7 +18,7 @@ namespace supermarket
 
             Money = _random.Next(_minValueMoney, _maxValueMoney);
 
-            AddProductBasket(products, _basket);
+            AddProductBasket(products);
         }
 
         private string Name { get; set; }
@@ -30,7 +30,7 @@ namespace supermarket
 
             for (int i = 0; i < _basket.Count; i++)
             {
-                Console.WriteLine($"Название продукта - {_basket [i].GetName()} Стоимость продукта - {_basket [i].GetPrice()}");
+                Console.WriteLine($"Название продукта - {_basket [i].Name} Стоимость продукта - {_basket [i].Prise}");
             }
         }
 
@@ -49,7 +49,7 @@ namespace supermarket
 
                 if (Money < purchaseAmount)
                 {
-                    _basket.RemoveAt(0);
+                    _basket.Remove(_basket[_random.Next(0,_basket.Count - 1)]);
                 }
             }
 
@@ -62,7 +62,7 @@ namespace supermarket
             return purchaseAmount;
         }
 
-        public void AddProductBasket(List<Product> products, List<Product> basket)
+        public void AddProductBasket(List<Product> products)
         {
             int numberSelectedProducts = _random.Next(1, products.Count);
 
@@ -72,7 +72,7 @@ namespace supermarket
             {
                 indexsProduct = _random.Next(0, products.Count);
 
-                basket.Add(products [indexsProduct]);
+                _basket.Add(products [indexsProduct]);
             }
         }
 
@@ -82,7 +82,7 @@ namespace supermarket
 
             for (int i = 0; i < _basket.Count; i++)
             {
-                basketPrice += _basket [i].GetPrice();
+                basketPrice += _basket [i].Prise;
             }
 
             return basketPrice;
