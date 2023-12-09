@@ -5,7 +5,7 @@ namespace supermarket
 {
     internal class Client
     {
-        static private Random _random = new Random();
+       static private Random _random = new Random();
 
         private List<Product> _basket = new List<Product>();
 
@@ -59,7 +59,7 @@ namespace supermarket
 
         public void AddProductBasket(List<Product> products)
         {
-            int numberSelectedProducts = _random.Next(1, products.Count);
+            int numberSelectedProducts = _random.Next(0, products.Count);
 
             int indexsProduct;
 
