@@ -23,8 +23,6 @@ namespace supermarket
         {
             AddProduct();
 
-            _copyProducts = _products.ToList();
-
             AddClient();
 
             ShowClients();
@@ -50,11 +48,11 @@ namespace supermarket
 
         private void AddClient()
         {
-            _queueClients.Enqueue(new Client(_copyProducts, "Алена"));
-            _queueClients.Enqueue(new Client(_copyProducts, "Дима"));
-            _queueClients.Enqueue(new Client(_copyProducts, "Аня"));
-            _queueClients.Enqueue(new Client(_copyProducts, "Оля"));
-            _queueClients.Enqueue(new Client(_copyProducts, "Данил"));
+            _queueClients.Enqueue(new Client(_products.ToList(), "Алена"));
+            _queueClients.Enqueue(new Client(_products.ToList(), "Дима"));
+            _queueClients.Enqueue(new Client(_products.ToList(), "Аня"));
+            _queueClients.Enqueue(new Client(_products.ToList(), "Оля"));
+            _queueClients.Enqueue(new Client(_products.ToList(), "Данил"));
         }
 
         private void ServeClients()
@@ -69,17 +67,9 @@ namespace supermarket
 
         private void ShowClients()
         {
-            int counter = 0;
-
-            while (counter <= _queueClients.Count -1)
+            foreach (Client client in _queueClients)
             {
-                Client client = _queueClients.Peek();
-
-                Console.WriteLine("деньги клиента");
-
                 client.ShowtInfo();
-
-                counter++;
             }
         }
     }

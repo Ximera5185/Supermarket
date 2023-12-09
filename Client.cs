@@ -5,7 +5,7 @@ namespace supermarket
 {
     internal class Client
     {
-       static private Random _random = new Random();
+        private static  Random s_random = new Random();
 
         private List<Product> _basket = new List<Product>();
 
@@ -20,9 +20,12 @@ namespace supermarket
         {
             _name = name;
 
-            _money = _random.Next(_minValueMoney, _maxValueMoney);
+            _money = s_random.Next(_minValueMoney, _maxValueMoney);
 
+            Console.WriteLine($"{_name} Деньги {_money}");
+            Console.WriteLine($"Колличество продуктов {products.Count}");
             AddProductBasket(products);
+            products.Clear();
         }
 
         public void ShowtInfo()
@@ -45,7 +48,7 @@ namespace supermarket
 
                 Console.WriteLine();
 
-                _basket.Remove(_basket [_random.Next(0, _basket.Count - 1)]);
+                _basket.Remove(_basket [s_random.Next(0, _basket.Count - 1)]);
             }
 
             Console.WriteLine($"{_name}\n" + $"Покупка успешна");
@@ -59,13 +62,13 @@ namespace supermarket
 
         public void AddProductBasket(List<Product> products)
         {
-            int numberSelectedProducts = _random.Next(0, products.Count);
+            int numberSelectedProducts = s_random.Next(0, products.Count);
 
             int indexsProduct;
 
             for (int i = 0; i < numberSelectedProducts; i++)
             {
-                indexsProduct = _random.Next(0, products.Count);
+                indexsProduct = s_random.Next(0, products.Count);
 
                 _basket.Add(products [indexsProduct]);
             }
