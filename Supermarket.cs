@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace supermarket
 {
     internal class Supermarket
     {
         private List<Product> _products = new List<Product>();
+
+        private List<Product> _copyProducts = new List<Product>();
 
         private Queue<Client> _queueClients = new Queue<Client>();
 
@@ -19,6 +22,8 @@ namespace supermarket
         public void Work()
         {
             AddProduct();
+
+            _copyProducts = _products.ToList();
 
             AddClient();
 
@@ -45,11 +50,11 @@ namespace supermarket
 
         private void AddClient()
         {
-            _queueClients.Enqueue(new Client(_products, "Алена"));
-            _queueClients.Enqueue(new Client(_products, "Дима"));
-            _queueClients.Enqueue(new Client(_products, "Аня"));
-            _queueClients.Enqueue(new Client(_products, "Оля"));
-            _queueClients.Enqueue(new Client(_products, "Данил"));
+            _queueClients.Enqueue(new Client(_copyProducts, "Алена"));
+            _queueClients.Enqueue(new Client(_copyProducts, "Дима"));
+            _queueClients.Enqueue(new Client(_copyProducts, "Аня"));
+            _queueClients.Enqueue(new Client(_copyProducts, "Оля"));
+            _queueClients.Enqueue(new Client(_copyProducts, "Данил"));
         }
 
         private void ServeClients()
