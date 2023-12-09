@@ -9,24 +9,25 @@ namespace supermarket
 
         private List<Product> _basket = new List<Product>();
 
+        private string _name;
+
+        private int _money;
+
         private readonly int _maxValueMoney = 700;
         private readonly int _minValueMoney = 100;
 
         public Client(List<Product> products, string name)
         {
-            Name = name;
+            _name = name;
 
-            Money = _random.Next(_minValueMoney, _maxValueMoney);
+            _money = _random.Next(_minValueMoney, _maxValueMoney);
 
             AddProductBasket(products);
         }
 
-        private string Name { get; set; }
-        private int Money { get; set; }
-
-        public void ShowClientInfo()
+        public void ShowtInfo()
         {
-            Console.WriteLine($"{Name} - {Money}");
+            Console.WriteLine($"{_name} - {_money}");
 
             for (int i = 0; i < _basket.Count; i++)
             {
@@ -34,32 +35,26 @@ namespace supermarket
             }
         }
 
-        public int Pay(int purchaseAmount)
+        public int Pay()
         {
-
-            while (Money < purchaseAmount)
+            while (_money < TakeBasketPrice())
             {
-                purchaseAmount = TakeBasketPrice();
-
-                Console.WriteLine($"{Name}\n" +
+                Console.WriteLine($"{_name}\n" +
                 $"Недостаточно средств\n" +
                 $"Выкидываем товар");
 
                 Console.WriteLine();
 
-                if (Money < purchaseAmount)
-                {
-                    _basket.Remove(_basket[_random.Next(0,_basket.Count - 1)]);
-                }
+                _basket.Remove(_basket [_random.Next(0, _basket.Count - 1)]);
             }
 
-            Console.WriteLine($"{Name}\n" + $"Покупка успешна");
+            Console.WriteLine($"{_name}\n" + $"Покупка успешна");
 
             Console.WriteLine();
 
-            Money -= purchaseAmount;
+            _money -= TakeBasketPrice();
 
-            return purchaseAmount;
+            return TakeBasketPrice();
         }
 
         public void AddProductBasket(List<Product> products)

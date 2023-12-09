@@ -9,12 +9,12 @@ namespace supermarket
 
         private Queue<Client> _queueClients = new Queue<Client>();
 
+        private int _cash;
+
         public Supermarket()
         {
-            Cash = 0;
+            _cash = 0;
         }
-
-        private int Cash { get; set; }
 
         public void Work()
         {
@@ -31,7 +31,7 @@ namespace supermarket
 
         private void ShowCashSupermarcet()
         {
-            Console.WriteLine($"Касса магазина - {Cash}");
+            Console.WriteLine($"Касса магазина - {_cash}");
         }
 
         private void AddProduct()
@@ -54,15 +54,11 @@ namespace supermarket
 
         private void ServeClients()
         {
-            int _purchaseAmount;
-
             while (_queueClients.Count > 0)
             {
                 Client client = _queueClients.Dequeue();
 
-                _purchaseAmount = client.TakeBasketPrice();
-
-                Cash += client.Pay(_purchaseAmount);
+                _cash += client.Pay();
             }
         }
 
@@ -77,7 +73,7 @@ namespace supermarket
 
                 Console.WriteLine("деньги клиента");
 
-                client.ShowClientInfo();
+                client.ShowtInfo();
 
                 counter++;
             }
