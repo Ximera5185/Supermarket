@@ -73,7 +73,6 @@ namespace supermarket
 
             while (counter <= _queueClients.Count -1)
             {
-
                 Client client = _queueClients.Peek();
 
                 Console.WriteLine("деньги клиента");

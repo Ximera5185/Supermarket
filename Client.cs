@@ -45,7 +45,7 @@ namespace supermarket
 
                 Console.WriteLine();
 
-                _basket.Remove(_basket [_random.Next(1, _basket.Count - 1)]);
+                _basket.Remove(_basket [_random.Next(0, _basket.Count - 1)]);
             }
 
             Console.WriteLine($"{_name}\n" + $"Покупка успешна");
