@@ -8,7 +8,6 @@
 
             Prise = prise;
         }
-
         public string Name { get; private set; }
         public int Prise { get; private set; }
     }
