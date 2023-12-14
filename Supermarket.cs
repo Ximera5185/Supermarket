@@ -8,8 +8,6 @@ namespace supermarket
     {
         private List<Product> _products = new List<Product>();
 
-        private List<Product> _copyProducts = new List<Product>();
-
         private Queue<Client> _queueClients = new Queue<Client>();
 
         private int _cash;
@@ -61,7 +59,7 @@ namespace supermarket
             {
                 Client client = _queueClients.Dequeue();
 
-                _cash += client.Pay();
+                _cash += client.BuyProducts();
             }
         }
 
@@ -69,7 +67,7 @@ namespace supermarket
         {
             foreach (Client client in _queueClients)
             {
-                client.ShowtInfo();
+                client.ShowInfo();
             }
         }
     }

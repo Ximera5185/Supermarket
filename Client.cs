@@ -7,14 +7,14 @@ namespace supermarket
     {
         private static Random s_random = new Random();
 
+        private readonly int _maxValueMoney = 700;
+        private readonly int _minValueMoney = 100;
+
         private List<Product> _basket = new List<Product>();
 
         private string _name;
 
         private int _money;
-
-        private readonly int _maxValueMoney = 700;
-        private readonly int _minValueMoney = 100;
 
         public Client(List<Product> products, string name)
         {
@@ -25,7 +25,7 @@ namespace supermarket
             AddProductBasket(products);
         }
 
-        public void ShowtInfo()
+        public void ShowInfo()
         {
             Console.WriteLine($"{_name} - {_money}");
 
@@ -35,7 +35,7 @@ namespace supermarket
             }
         }
 
-        public int Pay()
+        public int BuyProducts()
         {
             while (_money < TakeBasketPrice())
             {
@@ -45,7 +45,7 @@ namespace supermarket
 
                 Console.WriteLine();
 
-                _basket.Remove(_basket [s_random.Next(0, _basket.Count - 1)]);
+                _basket.Remove(_basket [s_random.Next(_basket.Count - 1)]);
             }
 
             Console.WriteLine($"{_name}\n" + $"Покупка успешна");
@@ -59,13 +59,13 @@ namespace supermarket
 
         public void AddProductBasket(List<Product> products)
         {
-            int numberSelectedProducts = s_random.Next(0, products.Count);
+            int numberSelectedProducts = s_random.Next(products.Count);
 
             int indexsProduct;
 
             for (int i = 0; i < numberSelectedProducts; i++)
             {
-                indexsProduct = s_random.Next(0, products.Count);
+                indexsProduct = s_random.Next(products.Count);
 
                 _basket.Add(products [indexsProduct]);
             }
